@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="icon" href="http://getbootstrap.com/favicon.ico">
+ 
+    <title><%= title %></title>
+    
+    <link href="http://getbootstrap.com/assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+ 
+    <link  href="/stylesheets/signin.css" rel="stylesheet">
+    <script type="text/javascript">
+      function handleSignIn() {
+        var email = document.getElementById('email').value;
+        var password = document.getElementById('password').value;
+        if (email.length < 4) {
+          alert('Please enter an email address longer than 4 characters.');
+          return false;
+        }
+        if (password.length < 4) {
+          alert('Please enter a password.');
+          return false;
+        }               
+        document.getElementById("signin").submit();
+      }
+    </script> 
+  </head>
+  <body data-gr-c-s-loaded="true">
+    <div class="container">
+      <form class="form-signin" id="signin" method="post">
+        <h2 class="form-signin-heading"><%= title %></h2>
+        <% if(message !== undefined) { %> 
+          <div class='<%= mtype %>'>
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+              <%= message %>
+          </div> 
+        <% } %>        
+        <p><%= description %></p>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="email" name="email" class="form-control" placeholder="Email address" required="" autofocus="">
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
+        <a href="/signup"> Sign Up</a>
+        <button class="btn btn-lg btn-primary btn-block" type="button" onclick="handleSignIn()">Sign in</button>
+      </form>
+    </div> <!-- /container -->
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+  </body> 
+</html>
