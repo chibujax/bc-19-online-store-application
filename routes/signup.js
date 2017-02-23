@@ -13,7 +13,6 @@ router.get('/', function(req, res, next) {
 });
 router.post('/', function(req, res, next) {
   var FirebaseRef = require('./fireb');
-  var url = Math.round(+new Date()/1000);
   var email = req.body.email;
   var password = req.body.password;
   var storename = req.body.storename;
@@ -27,8 +26,8 @@ router.post('/', function(req, res, next) {
       }
 
       var userRef = FirebaseRef.database().ref('stores/');
-      userRef.child(userData.uid).update(store);
-      req.flash('alert alert-success', 'You are now registered and can login');
+      userRef.child("'" + userData.uid + "'").update(store);
+      req.session.user = store;
       res.redirect('/stores/' + userData.uid);
     })
     .catch(error => {      

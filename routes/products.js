@@ -46,8 +46,12 @@ router.post('/', function(req, res) {
     imagurl: filename + '.jpg',
     storeid:  theBody.suid 
   };
-   sampleFile.mv(path.join(__dirname, '/../public', fObject.imagurl), function(err) {
+  console.log(fObject.imagurl);
+  console.log(sampleFile);
+   sampleFile.mv(path.join(__dirname, '/../public/images', fObject.imagurl), function(err) {
+     console.log('in file save');
     if (err){
+      consolelog('Error');
       res.render('products', { title: 'Products',
         storeurl: "stores/" + fObject.storeid,
         semail: theBody.semail,
@@ -55,16 +59,17 @@ router.post('/', function(req, res) {
         message: err,
         mtype: 'alert alert-danger'});           
       } 
-   });
-    var userRef = FirebaseRef.database().ref("stores/'" + fObject.storeid + "'/");
-    userRef.child('products').child(fObject.productid).update(fObject);
-    console.log(fObject.proemail); 
-    console.log(fObject.storeid);
-    res.render('products', { title: 'Products',
-      storeurl: "stores/" + fObject.storeid ,
-      semail: theBody.semail,
-      suid: theBody.suid,
-      message: 'Product added',
-      mtype: 'alert alert-success'});         
+      else {
+        var userRef = FirebaseRef.database().ref("stores/" + fObject.storeid + "");
+        userRef.child('products').child(fObject.productid).update(fObject);
+        res.render('products', { title: 'Products',
+          storeurl: "stores/" + fObject.storeid ,
+          semail: theBody.semail,
+          suid: theBody.suid,
+          message: 'Product added',
+          mtype: 'alert alert-success'}); 
+          }
+          console.log('image saved');
+   });        
 });
 module.exports = router;

@@ -26,7 +26,7 @@ router.post('/', function(req, res) {
   var password = req.body.password;
   FirebaseRef.auth().signInWithEmailAndPassword(email, password)
     .then(userData => { 
-      var userRef = FirebaseRef.database().ref('stores/'+ userData.uid);
+      var userRef = FirebaseRef.database().ref("stores/'" + userData.uid + "'");
       userRef.on('value',function(snapshot){
         if(snapshot.val() !== null && snapshot.val().storeurl !== null) {
           req.session.user = snapshot.val();

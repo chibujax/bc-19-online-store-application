@@ -32,10 +32,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ secret: 'chibujax' }));
-app.use(require('flash')());
-app.use(fileUpload({
-  limits: { fileSize: 50000 },
-}));
+app.use(fileUpload());
 
 app.use('/', index);
 app.use('/users', users);
