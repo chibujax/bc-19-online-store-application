@@ -13,42 +13,16 @@
     <script type="text/javascript" src="/javascripts/move-top.js"></script>
     <script type="text/javascript" src="/javascripts/easing.js"></script>
     <script type="text/javascript">
-      jQuery(document).ready(function($) {
-        $(".scroll").click(function(event){		
-          event.preventDefault();
-          $('html,body').animate({scrollTop:$(this.hash).offset().top},1000);
-        });
-      });
-    </script>
+     function handlePro(selectObject) {         
+        var value = selectObject.value;
+        alert("stores/" + value);
+        window.location.href = "stores/" + value;  
+     }
+    </script> 
     <!-- start-smoth-scrolling -->
     <link href="/stylesheets/font-awesome.css" rel="stylesheet"> 
     <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
-    <!--- start-rate---->
-    <script src="/javascripts/jstarbox.js"></script>
-      <link rel="stylesheet" href="/stylesheets/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
-        <script type="text/javascript">
-          jQuery(function() {
-          jQuery('.starbox').each(function() {
-            var starbox = jQuery(this);
-              starbox.starbox({
-              average: starbox.attr('data-start-value'),
-              changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
-              ghosting: starbox.hasClass('ghosting'),
-              autoUpdateAverage: starbox.hasClass('autoupdate'),
-              buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
-              stars: starbox.attr('data-star-count') || 5
-              }).bind('starbox-value-changed', function(event, value) {
-              if(starbox.hasClass('random')) {
-              var val = Math.random();
-              starbox.next().text(' '+val);
-              return val;
-              } 
-            })
-          });
-        });
-      </script>
-      <!---//End-rate---->
   </head>
   <body>
     <a href="#"><img src="images/download.png" class="img-head" alt=""></a>
@@ -105,42 +79,27 @@
 				<div class="tab-head ">
 					<nav class="nav-sidebar">
 						<ul class="nav tabs ">
-						  <li class="active"><a href="#" >Click on a store to view Products</a></li>
+						  <li class="active"><a href="#" >Select a store below to view Products</a><% 
+              if (Object.keys(mstores) < 1){
+              %> 
+              : No store Found. Try again later
+              <%} else { %>
+              <select onchange="handlePro(this);">
+              <option value =' '>Select store</option> 
+              <%
+               for (var pros in mstores){
+              %>
+              <option value ='<%= pros%>'>
+              <%=mstores[pros] %>
+              </option>
+              <%
+              }
+              %>
+              </select>
+               <% } %>
+              </li>
 						</ul>
-					</nav>
-					<div class=" tab-content tab-content-t ">
-						<div class="tab-pane active text-style" id="tab1">
-							<div class=" con-w3l">
-								<div class="col-md-3 m-wthree">
-									<div class="col-m">								
-										<a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
-											<img src="images/of.png" class="img-responsive" alt="">
-											<div class="offer"><p><span>Offer</span></p></div>
-										</a>
-										<div class="mid-1">
-											<div class="women">
-												<h6><a href="single.html">Moong</a>(1 kg)</h6>							
-											</div>
-											<div class="mid-2">
-												<p ><label>$2.00</label><em class="item_price">$1.50</em></p>
-												  <div class="block">
-													<div class="starbox small ghosting"> </div>
-												</div>
-												<div class="clearfix"></div>
-											</div>
-											<div class="add">
-											   <button class="btn btn-danger my-cart-btn my-cart-b " data-id="1" data-name="Moong" data-summary="summary 1" data-price="1.50" data-quantity="1" data-image="images/of.png">Add to Cart</button>
-											</div>
-											
-										</div>
-									</div>
-								</div>
-								<div class="clearfix"></div>
-							 </div>
-						</div>
-					</div>
-				</div>
-			
+					</nav>		
 		</div>
 		</div>
 		</div>
@@ -166,46 +125,6 @@
 <!-- for bootstrap working -->
 		<script src="/javascripts/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-<script type='text/javascript' src="/javascripts/jquery.mycart.js"></script>
-  <script type="text/javascript">
-  $(function () {
-
-    var goToCartIcon = function($addTocartBtn){
-      var $cartIcon = $(".my-cart-icon");
-      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-      $addTocartBtn.prepend($image);
-      var position = $cartIcon.position();
-      $image.animate({
-        top: position.top,
-        left: position.left
-      }, 500 , "linear", function() {
-        $image.remove();
-      });
-    }
-
-    $('.my-cart-btn').myCart({
-      classCartIcon: 'my-cart-icon',
-      classCartBadge: 'my-cart-badge',
-      affixCartIcon: true,
-      checkoutCart: function(products) {
-        $.each(products, function(){
-          console.log(this);
-        });
-      },
-      clickOnAddToCart: function($addTocart){
-        goToCartIcon($addTocart);
-      },
-      getDiscountPrice: function(products) {
-        var total = 0;
-        $.each(products, function(){
-          total += this.quantity * this.price;
-        });
-        return total * 1;
-      }
-    });
-
-  });
-  </script>
   
  
 </body>

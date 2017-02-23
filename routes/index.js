@@ -9,6 +9,7 @@ router.get('/', function(req, res, next) {
     isUser: false, 
     owner: 'Guest',
     storeurl: '',
+    mstores: {},
     mtype: undefined
   }
   if(req.session.user !== undefined && req.session.user.storeurl !== undefined) {
@@ -22,8 +23,30 @@ router.get('/', function(req, res, next) {
     mObject.mtype = req.session.alert.mtype;
     req.session.alert = undefined;
   }
-  console.log(mObject);
-  res.render('index', mObject);
+ var FirebaseRef = require('./fireb');
+  var userRef = FirebaseRef.database().ref("stores");
+  userRef.once('value')
+    .then(function(snapshot){
+      var result = snapshot.val();
+      if (result !== null) {
+          for (var pros in result){
+            if (result.hasOwnProperty(pros)){
+              mObject.mstores[pros] = result[pros].storename === undefined? ' ' : result[pros].storename;
+              console.log(" nna " + mObject.mstores);
+            }
+          }
+
+        res.render('index', mObject);        
+      }
+      console.log(mObject.mstores);
+    })
+    .catch(error => {  
+
+        mObject.message = error[0];
+        mObject.mtype=  'alert alert-danger';       
+        res.render('index', mObject);      
+  });  
+  
 });
 
 module.exports = router;
