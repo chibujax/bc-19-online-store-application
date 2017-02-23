@@ -11,6 +11,7 @@
     "debug": "~2.6.0",
     "ejs": "~2.5.5",
     "express": "~4.14.1",
+    "express-fileupload": "^0.1.1",
     "express-session": "^1.15.1",
     "firebase": "^3.6.9",
     "flash": "^1.1.0",

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%=title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- //for-mobile-apps -->
+    <link href="/stylesheets/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/stylesheets/style.css" rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+    <!-- start-smoth-scrolling -->
+    <link href="/stylesheets/font-awesome.css" rel="stylesheet"> 
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <!--- start-rate---->
+    <script src="/javascripts/jstarbox.js"></script>
+      <link rel="stylesheet" href="/stylesheets/jstarbox.css" type="text/css" media="screen" charset="utf-8" />
+        <script type="text/javascript">
+          jQuery(function() {
+          jQuery('.starbox').each(function() {
+            var starbox = jQuery(this);
+              starbox.starbox({
+              average: starbox.attr('data-start-value'),
+              changeable: starbox.hasClass('unchangeable') ? false : starbox.hasClass('clickonce') ? 'once' : true,
+              ghosting: starbox.hasClass('ghosting'),
+              autoUpdateAverage: starbox.hasClass('autoupdate'),
+              buttons: starbox.hasClass('smooth') ? false : starbox.attr('data-button-count') || 5,
+              stars: starbox.attr('data-star-count') || 5
+              }).bind('starbox-value-changed', function(event, value) {
+              if(starbox.hasClass('random')) {
+              var val = Math.random();
+              starbox.next().text(' '+val);
+              return val;
+              } 
+            })
+          });
+        });
+        </script>
+<!---//End-rate---->
+  </head>
+  <body>
+    <a href="#"><img src="/images/download.png" class="img-head" alt=""></a>
+    <div class="header">
+      <div class="container">			
+        <div class="logo">
+          <h1 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h1>
+        </div>
+        <div class="head-t">
+          <ul class="card">
+          <% if(isUser) { %> 
+            <li><a href='/' ><i class="fa fa-file-text-o" aria-hidden="true"></i>Home</a></li>
+            <% if(isMyStore) { %>             
+            <li><a href="/products" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Add Product</a></li>
+            <% } %>
+            <li><a href="/signout" ><i class="fa fa-file-text-o" aria-hidden="true"></i>Sign out</a></li>
+          <% } else { %>
+            <li><a href="/signin" ><i class="fa fa-user" aria-hidden="true"></i>signin</a></li>
+            <li><a href="/signup" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Signup</a></li>
+          <% } %>	
+          </ul>	
+        </div>			
+        <div class="header-ri">
+          <ul class="social-top">
+            <li><a href="#" >Owner: <%=owner %> | Store Name: <%=store %></a></li>
+          </ul>	         
+        </div>
+        <div class="nav-top">
+          <div class="collapse navbar-collapse" id="bs-megadropdown-tabs"> 
+          <% if(message !== undefined) { %> 
+            <div class='<%= mtype %>'>
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <%= message %>
+            </div> 
+          <% } %>  
+          </div>			
+        </div>			
+      </div>	
+	  </div>	
+
+    <!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <a href="#"><img class="first-slide" src="/images/ba2.jpg" alt="First slide"></a>       
+        </div>
+        <div class="item">
+          <a href="#"><img class="second-slide " src="/images/ba.jpg" alt="Second slide"></a>         
+        </div>
+        <div class="item">
+         <a href="#"> <img class="third-slide " src="/images/ba1.jpg" alt="Third slide"></a>         
+        </div>
+      </div>   
+    </div><!-- /.carousel -->
+
+    <!--content-->
+		<div class="product">
+		  <div class="container">
+		    <div class="spec ">
+				  <h3>Products</h3>
+				  <div class="ser-t">
+					  <b></b>
+					  <span><i></i></span>
+					  <b class="line"></b>
+				  </div>
+        </div>
+        <div class="add">
+          <button btn class="btn btn-success" id="url" <button id="demo" onclick="copyToClipboard(document.getElementById('url').innerHTML)">Store URL:  <%=storeurl %></button> 
+          <script>
+            function copyToClipboard(text) {
+              window.prompt("Copy to clipboard: Ctrl+C, Enter", text);
+            }
+          </script>                
+        </div>
+        <div class="clearfix"></div>
+        <div class="add">
+          <p><br/></p>
+          <h3><%=pMessage %></h3>       
+        </div>        
+			  <div class=" con-w3l agileinf">
+        <!--Products-->
+        <% 
+          for (var product in products) {
+            if (products.hasOwnProperty(product)) {
+              %>
+              <div class="col-md-3 pro-1">
+					      <div class="col-m">
+						      <a href="#" data-toggle="modal" data-target="#myModal1" class="offer-img">
+							      <img src='/images/<%=products[product].imagurl %>' class="img-responsive" alt="">
+						      </a>
+						      <div class="mid-1">
+							      <div class="women">
+								      <h6><a href='/products/<%= products[product].productid %>'><%=products[product].proname %></a></h6>							
+							      </div>
+							      <div class="mid-2">
+								      <p><em class="item_price">N<%=products[product].price %></em></p>
+								      <div class="block">
+								      </div>
+								      <div class="clearfix"></div>
+							      </div>
+							      <div class="add">
+							        <button class="btn btn-danger my-cart-btn my-cart-b" data-id="48" data-name="Cat Food" data-summary="summary 48" data-price="6.00" data-quantity="1" data-image="images/of48.png">Add to Cart</button>
+							      </div>
+						      </div> <!---mid -->
+					      </div>
+              </div>
+            <%
+            }
+          }          
+        %>
+			  </div>
+		  </div>
+	  </div>
+<!--footer-->
+    <div class="footer">
+      <div class="container">
+        <div class="clearfix"></div>
+          <div class="footer-bottom">
+            <h2 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h2>
+            <p class="fo-para">Jax Mall is just that special place, one stop shop, powered by BFA</p>
+          </div>
+        <div class="copy-right">
+          <p> &copy; 2017. BFA | Design by  Chibu Jax</p>
+        </div>
+      </div>
+    </div>
+<!-- //footer-->
+
+<!-- smooth scrolling -->
+	<script type="text/javascript">
+		$(document).ready(function() {
+		/*
+			var defaults = {
+			containerID: 'toTop', // fading element id
+			containerHoverID: 'toTopHover', // fading element hover id
+			scrollSpeed: 1200,
+			easingType: 'linear' 
+			};
+		*/								
+		$().UItoTop({ easingType: 'easeOutQuart' });
+		});
+	</script>
+	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
+<!-- //smooth scrolling -->
+<!-- for bootstrap working -->
+		<script src="/javascripts/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script type='text/javascript' src="/javascripts/jquery.mycart.js"></script>
+  <script type="text/javascript">
+  $(function () {
+
+    var goToCartIcon = function($addTocartBtn){
+      var $cartIcon = $(".my-cart-icon");
+      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
+      $addTocartBtn.prepend($image);
+      var position = $cartIcon.position();
+      $image.animate({
+        top: position.top,
+        left: position.left
+      }, 500 , "linear", function() {
+        $image.remove();
+      });
+    }
+
+    $('.my-cart-btn').myCart({
+      classCartIcon: 'my-cart-icon',
+      classCartBadge: 'my-cart-badge',
+      affixCartIcon: true,
+      checkoutCart: function(products) {
+        $.each(products, function(){
+          console.log(this);
+        });
+      },
+      clickOnAddToCart: function($addTocart){
+        goToCartIcon($addTocart);
+      },
+      getDiscountPrice: function(products) {
+        var total = 0;
+        $.each(products, function(){
+          total += this.quantity * this.price;
+        });
+        return total * 1;
+      }
+    });
+
+  });
+  </script>
+
+  
+  
+
+</body>
+</html>

@@ -5,12 +5,18 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var session = require('express-session');
+var fileUpload = require('express-fileupload');
 
 
 var index = require('./routes/index');
 var users = require('./routes/users');
 var signup = require('./routes/signup');
 var signin = require('./routes/signin');
+var stores = require('./routes/stores');
+var product = require('./routes/product');
+var products = require('./routes/products');
+var signout = require('./routes/signout');
+var unknownp = require('./routes/unknownp');
 
 var app = express();
 
@@ -25,13 +31,21 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: '123' }));
+app.use(session({ secret: 'chibujax' }));
 app.use(require('flash')());
+app.use(fileUpload({
+  limits: { fileSize: 50000 },
+}));
 
 app.use('/', index);
 app.use('/users', users);
 app.use('/signup', signup);
 app.use('/signin', signin);
+app.use('/stores', stores);
+app.use('/product', product);
+app.use('/products', products);
+app.use('/signout', signout);
+app.use('*', unknownp);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

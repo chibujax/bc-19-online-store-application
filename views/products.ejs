@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <title><%=title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/stylesheets/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/stylesheets/style.css" rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+    <link href="/stylesheets/font-awesome.css" rel="stylesheet"> 
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+    <script type="text/javascript">
+     function handlePro() {         
+        var proname = document.getElementById('proname').value;
+        var prodescription = document.getElementById('prodescription').value;
+        var price = document.getElementById('price').value;
+        var imgurl = document.getElementById('imgurl').value;
+        if (proname.length < 4) {
+          alert('Please enter product name longer than 4 characters.');
+          return false;
+        }
+        if (prodescription.length < 4) {
+          alert('Please product description longer than 4 characters.');
+          return false;
+        }
+        if (price.length < 1) {
+          alert('Please enter Price');
+          return false;
+        }    
+        var priceholder = parseFloat(price,10);
+        if (isNaN(priceholder)) {
+          alert('Price must be number');
+          return false;
+        }          
+        if (imgurl.length < 4) {
+          alert('Please enter an inage file.');
+          return false;
+        }                
+        document.getElementById("products").submit();
+      }
+ 
+    </script>  
+  </head>
+<body>
+  <div class="header">
+    <div class="container">			
+      <div class="logo">
+        <h1 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h1>
+      </div>
+      <div class="head-t">
+        <ul class="card">
+          <li><a href='<%=storeurl %>'><i class="fa fa-shopping-cart" aria-hidden="true"></i>Store</a></li>
+        </ul>	
+      </div>			
+      <div class="header-ri">
+        <ul class="social-top">
+        </ul>	
+      </div>
+      <div class="nav-top">
+        <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">  
+        </div>			
+      </div>			
+    </div>	
+  </div>	
+     <!--banner-->
+  <div class="banner-top">
+    <div class="container">
+      <h3 >Add product</h3>
+      <h4><a href='<%=storeurl %>'>Store</a><label>/</label>Add Product</h4>
+      <div class="clearfix"> </div>
+    </div>
+  </div>
+  <div class="login">
+    <div class="main-agileits">
+        <div class="form-w3agile form1">      
+          <h3>Add Product</h3>
+          <% if(message !== undefined) { %> 
+            <div class='<%= mtype %>'>
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <%= message %>
+            </div> 
+          <% } %>             
+          <form id="products" action="/products" encType="multipart/form-data" method="post">
+                        Product Name:
+            <div class="key">
+              <input  type="text"  name="proname" id="proname" required="">
+              <div class="clearfix"></div>
+            </div>  
+                        Product description: 
+            <div class="key">
+              <textarea name="prodescription" maxlength="50" id="prodescription" rows="4" cols="50" ></textarea>
+              <div class="clearfix"></div>
+            </div>
+                        Price:
+            <div class="key">
+              <input  type="text" id="price" name="price" required="">
+              <div class="clearfix"></div>
+            </div>       
+                        Image:              
+            <div class="key">
+              <input type="file" name="imgurl" id="imgurl" />
+              <div class="clearfix"></div>
+            </div>
+            <input type="hidden" value='<%= semail%>' name="semail">
+            <input type="hidden" value='<%= suid%>' name="suid">
+            <button type="button" class="btn btn-success" onclick="handlePro()" >Add Product</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+<!--footer-->
+    <div class="footer">
+      <div class="container">
+        <div class="clearfix"></div>
+          <div class="footer-bottom">
+            <h2 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h2>
+            <p class="fo-para">Jax Mall is just that special place, one stop shop, powered by BFA</p>
+          </div>
+        <div class="copy-right">
+          <p> &copy; 2017. BFA | Design by  Chibu Jax</p>
+        </div>
+      </div>
+    </div>
+<!-- //footer-->
+
+
+<!-- for bootstrap working -->
+    <script src="/javascripts/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+
+  </body>
+</html>

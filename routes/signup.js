@@ -7,7 +7,8 @@ router.get('/', function(req, res, next) {
     res.redirect('/stores' + req.session.user.storeurl); 
   }    
   res.render('signup', { title: 'Online Store Signup',
-  message: undefined,
+    message: undefined,
+    mtype: undefined,
     description: 'Provide the details to signup for a store'});
 });
 router.post('/', function(req, res, next) {
@@ -28,7 +29,7 @@ router.post('/', function(req, res, next) {
       var userRef = FirebaseRef.database().ref('stores/');
       userRef.child(userData.uid).update(store);
       req.flash('alert alert-success', 'You are now registered and can login');
-      res.redirect('/signin');
+      res.redirect('/stores/' + userData.uid);
     })
     .catch(error => {      
       var errorCode = error.code;

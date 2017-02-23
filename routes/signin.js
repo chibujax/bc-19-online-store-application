@@ -1,15 +1,23 @@
 var express = require('express');
 var router = express.Router();
-router.get('/', function(req, res, next) {
+router.get('/', function(req, res) {
+  var mObject = {
+    title: 'Signin',
+    message: undefined,
+    description: 'Provide login details to access store',
+    mtype: undefined
+  }   
+  if(req.session.alert !== undefined) {
+    mObject.message = req.session.alert.message;
+    mObject.mtype = req.session.alert.mtype;
+    req.session.alert = undefined;    
+  } 
   if(req.session.user !== undefined && req.session.user.storeurl !== undefined){
     res.redirect('/stores' + req.session.user.storeurl); 
   }  
-  res.render('signin', { title: 'Signin',
-    message: undefined,
-    description: 'Provide login details to access store'
- });
+  res.render('signin', mObject);
 });
-router.post('/', function(req, res, next) {
+router.post('/', function(req, res) { 
   if(req.session.user !== undefined && req.session.user.storeurl !== undefined){
     res.redirect('/stores' + req.session.user.storeurl); 
   }  
@@ -22,7 +30,7 @@ router.post('/', function(req, res, next) {
       userRef.on('value',function(snapshot){
         if(snapshot.val() !== null && snapshot.val().storeurl !== null) {
           req.session.user = snapshot.val();
-          res.redirect('/stores' + req.session.user.storeurl); 
+          res.redirect('/stores' + snapshot.val().storeurl); 
         } 
         else {
           res.render('signin', { title: 'Online Store Signin',
