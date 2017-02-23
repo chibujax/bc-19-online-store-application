@@ -31,7 +31,7 @@ router.get('/', function(req, res, next) {
       if (result !== null) {
           for (var pros in result){
             if (result.hasOwnProperty(pros)){
-              mObject.mstores[pros] = result[pros].storename === undefined? ' ' : result[pros].storename;
+              mObject.mstores[pros] = result[pros].storename === undefined? 'Store Extension' : result[pros].storename;
               console.log(" nna " + mObject.mstores);
             }
           }

@@ -45,7 +45,9 @@
 </div>
 		<div class="single">
 			<div class="container">
-						<div class="single-top-main">
+			        <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+            <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+						<div class="single-top-main simpleCart_shelfItem">
 	   		<div class="col-md-5 single-top">
 	   		<div class="single-w3agile">
 							
@@ -67,11 +69,12 @@
 			</div>
 			<div class="col-md-7 single-top-left ">
 								<div class="single-right">
-				<h3><%=proname %></h3>
+				<h3 class="item_name"><%=proname %></h3>
 				
 					
 				 <div class="pr-single">
-				  <p class="reduced "><%=price %></p>
+				  <p class="reduced item_price"><%=price %></p>
+					<input type="text" value="1" class="item_Quantity">
 				</div>
 				<div class="block block-w3">
 					<div class="starbox small ghosting"> </div>
@@ -85,7 +88,7 @@
 					<li><a href="#" class="icon dribbble"><i class="fa fa-dribbble" aria-hidden="true"></i><span></span></a></li>
 				</ul>
 					<div class="add add-3">
-										   <button class="btn btn-danger my-cart-btn my-cart-b" data-id="1" data-name="Wheat" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">Add to Cart</button>
+										   <button class="btn btn-danger item_add my-cart-btn my-cart-b" data-id="1" data-name="Wheat" data-summary="summary 1" data-price="6.00" data-quantity="1" data-image="images/si.jpg">Add to Cart</button>
 										</div>
 				
 				 
@@ -117,66 +120,22 @@
       </div>
     </div>
 <!-- //footer-->
-
-<!-- smooth scrolling -->
-	<script type="text/javascript">
-		$(document).ready(function() {
-		/*
-			var defaults = {
-			containerID: 'toTop', // fading element id
-			containerHoverID: 'toTopHover', // fading element hover id
-			scrollSpeed: 1200,
-			easingType: 'linear' 
-			};
-		*/								
-		$().UItoTop({ easingType: 'easeOutQuart' });
-		});
-	</script>
-	<a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
-<!-- //smooth scrolling -->
 <!-- for bootstrap working -->
 		<script src="/javascripts/bootstrap.js"></script>
 <!-- //for bootstrap working -->
-<script type='text/javascript' src="/javascripts/jquery.mycart.js"></script>
-  <script type="text/javascript">
-  $(function () {
-
-    var goToCartIcon = function($addTocartBtn){
-      var $cartIcon = $(".my-cart-icon");
-      var $image = $('<img width="30px" height="30px" src="' + $addTocartBtn.data("image") + '"/>').css({"position": "fixed", "z-index": "999"});
-      $addTocartBtn.prepend($image);
-      var position = $cartIcon.position();
-      $image.animate({
-        top: position.top,
-        left: position.left
-      }, 500 , "linear", function() {
-        $image.remove();
-      });
+<script src="/javascripts/simpleCart.js"></script>
+<script>
+  simpleCart({
+    checkout: {
+        type: "SendForm" , 
+        url: "/checkout",
+        sandbox: true , 
+        method: "POST" ,       
+      currency: "USD",
+      email: "you@yours.com"
     }
-
-    $('.my-cart-btn').myCart({
-      classCartIcon: 'my-cart-icon',
-      classCartBadge: 'my-cart-badge',
-      affixCartIcon: true,
-      checkoutCart: function(products) {
-        $.each(products, function(){
-          console.log(this);
-        });
-      },
-      clickOnAddToCart: function($addTocart){
-        goToCartIcon($addTocart);
-      },
-      getDiscountPrice: function(products) {
-        var total = 0;
-        $.each(products, function(){
-          total += this.quantity * this.price;
-        });
-        return total * 1;
-      }
-    });
-
   });
-  </script>
+</script>
 
 </body>
 </html>

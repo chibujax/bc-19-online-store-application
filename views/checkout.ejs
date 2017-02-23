@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+  <title><%=title %></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link href="/stylesheets/bootstrap.css" rel='stylesheet' type='text/css' />
+    <link href="/stylesheets/style.css" rel='stylesheet' type='text/css' />
+    <script src="/javascripts/jquery-1.11.1.min.js"></script>
+    <link href="/stylesheets/font-awesome.css" rel="stylesheet"> 
+    <link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Noto+Sans:400,700' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <div class="header">
+      <div class="container">			
+        <div class="logo">
+          <h1 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h1>
+        </div>
+        <div class="head-t">
+          <ul class="card">
+            <li><a href="/signup" ><i class="fa fa-arrow-right" aria-hidden="true"></i>Signup</a></li>
+          </ul>	
+        </div>			
+        <div class="header-ri">
+          <ul class="social-top">
+          </ul>	
+        </div>
+        <div class="nav-top">
+          <div class="collapse navbar-collapse" id="bs-megadropdown-tabs">   
+          </div>			
+        </div>			
+      </div>	
+	  </div>	
+    <!--banner-->
+    <div class="banner-top">
+	    <div class="container">
+		    <h3 >Checkout</h3>
+		    <h4><a href="/">Home</a><label>/</label>Checkout</h4>
+		    <div class="clearfix"> </div>
+	    </div>
+    </div>
+    <!--login-->
+	  <div class="login">
+		  <div class="main-agileits">
+				<div class="form-w3agile">
+					<h3>Checkout</h3>
+          <% if(message !== undefined) { %> 
+            <div class='<%= mtype %>'>
+              <a href="#" class="close" data-dismiss="alert">&times;</a>
+                <%= message %>
+            </div> 
+          <% } %><p>      <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
+<a href="javascript:;" class="simpleCart_checkout">Checkout</a></p>   
+                <div class="simpleCart_items"></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+<!--footer-->
+    <div class="footer">
+      <div class="container">
+        <div class="clearfix"></div>
+          <div class="footer-bottom">
+            <h2 ><a href="/"><b>T<br>H<br>E</b>Jax Mall<span>The Best Online Mall</span></a></h2>
+            <p class="fo-para">Jax Mall is just that special place, one stop shop, powered by BFA</p>
+          </div>
+        <div class="copy-right">
+          <p> &copy; 2017. BFA | Design by  Chibu Jax</p>
+        </div>
+      </div>
+    </div>
+<!-- //footer-->
+
+
+<!-- for bootstrap working -->
+		<script src="/javascripts/bootstrap.js"></script>
+<!-- //for bootstrap working -->
+<script src="/javascripts/simpleCart.js"></script>
+<script>
+  simpleCart({
+    checkout: {
+        type: "AmazonPayments" , 
+        merchant_signature: "XXXXXXXXX" ,
+        merchant_id: "XXX",
+        aws_access_key_id: "XXX" ,
+        sandbox: true , 
+        method: "POST" ,       
+      currency: "USD",
+      email: "you@yours.com"
+    }
+  });
+</script>
+  </body>
+</html>

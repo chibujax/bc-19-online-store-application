@@ -13,7 +13,7 @@ router.get('/:id', function(req, res) {
     isUser: false,  
     storeurl: '/#' 
   };
-  var userRef = FirebaseRef.database().ref("stores/'"+ req.params.id +"'");
+  var userRef = FirebaseRef.database().ref("stores/"+ req.params.id +"");
   userRef.once('value')
     .then(function(snapshot){
       var result = snapshot.val();
@@ -23,7 +23,7 @@ router.get('/:id', function(req, res) {
         res.redirect('/');  
       } 
       else {
-        var storeU = result.products === undefined ? req.params.id : result.uid;
+        var storeU = result.uid === undefined ? "/" + req.params.id : result.uid;
         var products = result.products === undefined ? {} : result.products;
         mObject.products = products;
         mObject.owner = result.email === undefined ? '' : result.email; 

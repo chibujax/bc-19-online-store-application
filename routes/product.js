@@ -4,7 +4,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/:id/:store', function(req, res) {
   var FirebaseRef = require('./fireb');
-  var userRef = FirebaseRef.database().ref("stores/'"+ req.params.store +"'/products/" + req.params.id );
+  var userRef = FirebaseRef.database().ref("stores/"+ req.params.store +"/products/" + req.params.id );
   userRef.once('value')
     .then(function(snapshot){
       var result = snapshot.val();

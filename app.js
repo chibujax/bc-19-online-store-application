@@ -15,6 +15,7 @@ var signin = require('./routes/signin');
 var stores = require('./routes/stores');
 var product = require('./routes/product');
 var products = require('./routes/products');
+var checkout = require('./routes/checkout');
 var signout = require('./routes/signout');
 var unknownp = require('./routes/unknownp');
 
@@ -41,6 +42,7 @@ app.use('/signin', signin);
 app.use('/stores', stores);
 app.use('/product', product);
 app.use('/products', products);
+app.use('/checkout', checkout);
 app.use('/signout', signout);
 app.use('*', unknownp);
 
