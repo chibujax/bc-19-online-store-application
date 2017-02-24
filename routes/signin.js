@@ -45,7 +45,7 @@ router.post('/', function(req, res) {
       var errorCode = error.code;
       var errorMessage = error.message;
       res.render('signin', { title: 'Online Store Signin',
-        message: errorCode,
+        message: errorMessage,
         mtype: 'alert alert-danger',
         description: 'Provide login details to access store'
       });       

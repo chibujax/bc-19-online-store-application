@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
       var errorCode = error.code;
       var errorMessage = error.message;
       res.render('signup', { title: 'Online Store Signup',
-        message: errorCode,
+        message: error.message,
         mtype: 'alert alert-danger',
         description: 'Provide the details to signup for a store'});       
     });
