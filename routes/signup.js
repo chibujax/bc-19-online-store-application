@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
       }
 
       var userRef = FirebaseRef.database().ref('stores/');
-      userRef.child("'" + userData.uid + "'").update(store);
+      userRef.child(userData.uid).update(store);
       req.session.user = store;
       res.redirect('/stores/' + userData.uid);
     })

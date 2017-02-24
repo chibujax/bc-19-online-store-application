@@ -15,6 +15,10 @@
     <script type="text/javascript">
      function handlePro(selectObject) {         
         var value = selectObject.value;
+        if(value === ' '){
+          alert('Please select store');
+          return false;
+        }
         window.location.href = "stores/" + value;  
      }
     </script> 
