@@ -18,7 +18,6 @@ router.get('/', function(req, res, next) {
     mObject.owner = req.session.user.email === undefined ? 'Guest.' : req.session.user.email; 
   }    
   if(req.session.alert !== undefined) {
-    console.log("alert: " + req.session.alert.message);
     mObject.message = req.session.alert.message;
     mObject.mtype = req.session.alert.mtype;
     req.session.alert = undefined;
@@ -32,13 +31,11 @@ router.get('/', function(req, res, next) {
           for (var pros in result){
             if (result.hasOwnProperty(pros)){
               mObject.mstores[pros] = result[pros].storename === undefined? 'Store Extension' : result[pros].storename;
-              console.log(" nna " + mObject.mstores);
             }
           }
 
         res.render('index', mObject);        
       }
-      console.log(mObject.mstores);
     })
     .catch(error => {  
 

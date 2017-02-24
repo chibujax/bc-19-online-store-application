@@ -8,6 +8,7 @@ router.get('/:id', function(req, res) {
     isMyStore: false,
     products: undefined,
     message: undefined,
+    coded: '',
     mtype: undefined,
     pMessage: undefined,
     isUser: false,  
@@ -25,6 +26,7 @@ router.get('/:id', function(req, res) {
       else {
         var storeU = result.uid === undefined ? "/" + req.params.id : result.uid;
         var products = result.products === undefined ? {} : result.products;
+        mObject.coded = req.params.id;
         mObject.products = products;
         mObject.owner = result.email === undefined ? '' : result.email; 
         mObject.store = result.storename === undefined ? '' : result.storename; 

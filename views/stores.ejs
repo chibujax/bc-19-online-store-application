@@ -94,8 +94,8 @@
           </script>                
         </div>
         <div class="clearfix"></div>
-        <span class="simpleCart_quantity"></span> items - <span class="simpleCart_total"></span>
-            <a href="javascript:;" class="simpleCart_checkout">Checkout</a>
+<span class="simpleCart_quantity"></span> items - <span class="simpleCart_total add-1"></span>
+<a href="javascript:;" class="simpleCart_checkout  add-1">Checkout</a>
         <div class="add">
           <p><br/></p>
           <h3><%=pMessage %></h3>       
@@ -113,12 +113,12 @@
 						      </a>
 						      <div class="mid-1">
 							      <div class="women">
-								      <h6><a class="item_name" href='/product/<%= products[product].productid %>/<%= products[product].storeid %>'><%=products[product].proname %></a></h6>							
+								      <h6><a class="item_name" href='/product/<%= products[product].productid %>/<%= coded %>'><%=products[product].proname %></a></h6>							
 							      </div>
 							      <div class="mid-2">
-								      <p><em class="item_price">N<%=products[product].price %></em></p>
+								      <p><em class="item_price">$<%=products[product].price %></em></p>
                       <br>
-                      <input type="text" value="1" class="item_Quantity">
+                      <input type="text"  maxlength="2" size="2" value="1" class="item_Quantity">
 								      <div class="block">
 								      </div>
 								      <div class="clearfix"></div>

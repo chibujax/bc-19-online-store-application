@@ -15,7 +15,6 @@ router.get('/', function(req, res) {
     mtype: undefined
   }   
   if(req.session.alert !== undefined) {
-    console.log("alert: " + req.session.alert.message);
     mObject.message = req.session.alert.message;
     mObject.mtype = req.session.alert.mtype;
     req.session.alert = undefined;
@@ -46,12 +45,8 @@ router.post('/', function(req, res) {
     imagurl: filename + '.jpg',
     storeid:  theBody.suid 
   };
-  console.log(fObject.imagurl);
-  console.log(sampleFile);
    sampleFile.mv(path.join(__dirname, '/../public/images', fObject.imagurl), function(err) {
-     console.log('in file save');
     if (err){
-      consolelog('Error');
       res.render('products', { title: 'Products',
         storeurl: "stores/" + fObject.storeid,
         semail: theBody.semail,
@@ -69,7 +64,6 @@ router.post('/', function(req, res) {
           message: 'Product added',
           mtype: 'alert alert-success'}); 
           }
-          console.log('image saved');
    });        
 });
 module.exports = router;
